@@ -1,0 +1,35 @@
+﻿@model SverigesRadioViewModel
+
+<div>
+    @foreach (var program in Model.programs)
+    {
+        <div style="text-align:center;">
+            <h1>@program.name</h1><br />
+        </div>
+        <div style="float: left; width: 100%";>
+            <img src="@program.socialimage" style="width: 300px; height: 300px; float: left;" />
+        </div>
+        <div style="">
+            <br /><p>@program.description</p><br /><br />
+        </div>
+        <h4>Podavsnitt</h4><br />
+        foreach (var programs in Model.podfilesList)
+        {
+            foreach (var pod in programs)
+            {
+                if (pod.programID == program.id)
+                {
+                    <br />
+                    <div style="">
+                        <p>Titel: @pod.title</p>
+                        <p>Publiceringsdatum: @pod.publishdateutc.ToShortDateString()</p>
+                        <p>Längd (minuter): @pod.duration</p>
+                        <audio controls>
+                            <source src="@pod.url" type="audio/mp3" />
+                        </audio>
+                    </div>
+                }
+            }
+        }
+    }
+</div>
